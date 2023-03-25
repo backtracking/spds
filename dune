@@ -1,0 +1,56 @@
+(env
+ (dev
+  (flags (:standard -w -27-26-32))))
+
+(library
+ (name sparr)
+ (modules sparr))
+(test
+ (name test_sparr)
+ (modules test_sparr)
+ (libraries sparr))
+
+(library
+ (name splist)
+ (modules splist)
+ (libraries vector))
+(test
+ (name test_splist)
+ (modules test_splist)
+ (libraries splist))
+
+(library
+ (name spuf)
+ (modules spuf)
+ (libraries sparr))
+(test
+ (name test_spuf)
+ (modules test_spuf)
+ (libraries spuf))
+
+(library
+ (name spgr)
+ (modules spgr)
+ (libraries sparr splist))
+;; (test
+;;  (name test_spgr)
+;;  (modules test_spgr)
+;;  (libraries spgr))
+
+(library
+ (name dp)
+ (modules dp)
+ (libraries spgr spuf))
+(test
+ (name test_dp)
+ (modules test_dp)
+ (libraries dp))
+
+(library
+ (name parray)
+ (modules parray))
+
+(executable
+ (name bench)
+ (modules bench)
+ (libraries unix sparr parray splist spgr))
