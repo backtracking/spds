@@ -1,6 +1,6 @@
 # Semi-Persistent Data Structures
 
-This is a quick implementation of the ideas in
+This is a quick OCaml implementation of the ideas in
 [this paper](https://hal.inria.fr/hal-04045849):
 
     Sylvain Conchon and Jean-Christophe Filliâtre
