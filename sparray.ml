@@ -3,7 +3,7 @@
 
    Principle: use Baker's persistent arrays, but save some of the work.
 
-   Note: this is a defensive version, where we use constructor `I`
+   Note: this is a defensive version, where we use constructor `Invalid`
    to invalidate a version. This is not needed if we statically check
    that the semi-persistent array is correctly used. *)
 
@@ -11,28 +11,28 @@ type 'a t =
   'a data ref
 
 and 'a data =
-| A of 'a array
-| D of int * 'a * 'a t
-| I
+| Base of 'a array
+| Diff of int * 'a * 'a t
+| Invalid
 
 let make n v =
   if n < 0 then invalid_arg "make";
-  ref (A (Array.make n v))
+  ref (Base (Array.make n v))
 
 let init n f =
   if n < 0 then invalid_arg "init";
-  ref (A (Array.init n f))
+  ref (Base (Array.init n f))
 
 let rec reroot t = match !t with
-  | A a ->
+  | Base a ->
       a
-  | D (i, v, t') ->
+  | Diff (i, v, t') ->
       let a = reroot t' in
       a.(i) <- v;
       t := !t';
-      t' := I;
+      t' := Invalid;
       a
-  | I ->
+  | Invalid ->
       assert false
 
 let get t i =
@@ -44,10 +44,10 @@ let set t i v =
   let old = a.(i) in
   a.(i) <- v;
   let res = ref !t in
-  t := D (i, old, res);
+  t := Diff (i, old, res);
   res
 
 let rec nd_get t i = match !t with
-  | A a          -> a.(i)
-  | D (j, v, t') -> if i = j then v else nd_get t' i
-  | I            -> assert false
+  | Base a          -> a.(i)
+  | Diff (j, v, t') -> if i = j then v else nd_get t' i
+  | Invalid         -> assert false
