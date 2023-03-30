@@ -1,4 +1,12 @@
 
+(* Semi-persistent arrays.
+
+   Principle: use Baker's persistent arrays, but save some of the work.
+
+   Note: this is a defensive version, where we use constructor `I`
+   to invalidate a version. This is not needed if we statically check
+   that the semi-persistent array is correctly used. *)
+
 type 'a t =
   'a data ref
 
