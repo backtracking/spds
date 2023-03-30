@@ -1,5 +1,5 @@
 
-open Sparr
+open Sparray
 
 let () =
   let v0 = make 7 1 in

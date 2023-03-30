@@ -1,5 +1,5 @@
 
-module A = Sparr
+module A = Sparray
 module L = Splist
 
 type t = {

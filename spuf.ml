@@ -1,5 +1,5 @@
 
-module A = Sparr
+module A = Sparray
 
 type t = {
   link: int A.t;

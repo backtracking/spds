@@ -3,12 +3,12 @@
   (flags (:standard -w -27-26-32))))
 
 (library
- (name sparr)
- (modules sparr))
+ (name sparray)
+ (modules sparray))
 (test
- (name test_sparr)
- (modules test_sparr)
- (libraries sparr))
+ (name test_sparray)
+ (modules test_sparray)
+ (libraries sparray))
 
 (library
  (name splist)
@@ -22,25 +22,21 @@
 (library
  (name spuf)
  (modules spuf)
- (libraries sparr))
+ (libraries sparray))
 (test
  (name test_spuf)
  (modules test_spuf)
  (libraries spuf))
 
 (library
- (name spgr)
- (modules spgr)
- (libraries sparr splist))
-;; (test
-;;  (name test_spgr)
-;;  (modules test_spgr)
-;;  (libraries spgr))
+ (name spgraph)
+ (modules spgraph)
+ (libraries sparray splist))
 
 (library
  (name dp)
  (modules dp)
- (libraries spgr spuf))
+ (libraries spgraph spuf))
 (test
  (name test_dp)
  (modules test_dp)
@@ -53,4 +49,4 @@
 (executable
  (name bench)
  (modules bench)
- (libraries unix sparr parray splist spgr))
+ (libraries unix sparray parray splist spgraph))

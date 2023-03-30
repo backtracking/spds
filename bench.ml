@@ -57,9 +57,9 @@ module PA = Bench(struct
   let update t x = Parray.set t (x land 0xff) x
 end)
 module SPA = Bench(struct
-  type t = int Sparr.t
-  let create () = Sparr.make 256 0
-  let update t x = Sparr.set t (x land 0xff) x
+  type t = int Sparray.t
+  let create () = Sparray.make 256 0
+  let update t x = Sparray.set t (x land 0xff) x
 end)
 (* let () = PA.bench "persistent arrays" values
  * let () = SPA.bench "semi-persistent arrays" values *)
@@ -85,11 +85,11 @@ module PG = Bench(struct
     Parray.set t i (j :: Parray.get t i)
 end)
 module SPG = Bench(struct
-  type t = Spgr.t
-  let create () = Spgr.create 256
+  type t = Spgraph.t
+  let create () = Spgraph.create 256
   let update t x =
     let i = x land 0xff and j = (x+3) land 0xff in
-    Spgr.add_edge t i j
+    Spgraph.add_edge t i j
 end)
 let () = PG.bench "persistent graphs" values
 let () = SPG.bench "semi-persistent graphs" values

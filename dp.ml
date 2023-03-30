@@ -49,7 +49,7 @@ let forall x  f  = Fforall (x, f)
 
 type ctx = {
   uf: Spuf.t;
-  gr: Spgr.t;
+  gr: Spgraph.t;
 }
 (* INVARIANTS:
    1 - `uf` is closed by congruence (for both `prev` and `path`)
@@ -59,7 +59,7 @@ type ctx = {
 
 (* ensure invariant 3 *)
 let consider_term ctx t = match t.tkind with
-  | Tprev p -> { ctx with gr = Spgr.add_edge ctx.gr t.tid p.tid }
+  | Tprev p -> { ctx with gr = Spgraph.add_edge ctx.gr t.tid p.tid }
   | Tvar _  -> ctx
 let consider_atom ctx = function
   | Aeq (t1, t2) | Apath (t1, t2) -> consider_term (consider_term ctx t1) t2
@@ -76,7 +76,7 @@ let test_equal ctx t1 t2 =
   r1 = r2
 
 let test_path ctx t1 t2 =
-  Spgr.exists_path ctx.gr t1.tid t2.tid
+  Spgraph.exists_path ctx.gr t1.tid t2.tid
 
 let fold_terms2 acc f =
   Hashtbl.fold (fun _ t1 acc ->
@@ -84,7 +84,7 @@ let fold_terms2 acc f =
 
 let add_path ctx t1 t2 =
  if test_path ctx t1 t2 then ctx else
- { ctx with gr = Spgr.add_edge ctx.gr t1.tid t2.tid }
+ { ctx with gr = Spgraph.add_edge ctx.gr t1.tid t2.tid }
 
 let rec add_equality ctx t1 t2 =
   if test_equal ctx t1 t2 then ctx else
@@ -113,7 +113,7 @@ let decide f =
     | Fimp (a, f) -> dec (assume ctx a) f
     | Fforall (_, f) -> dec ctx f
   in
-  let ctx = { uf = Spuf.create !next; gr = Spgr.create !next; } in
+  let ctx = { uf = Spuf.create !next; gr = Spgraph.create !next; } in
   let ctx = consider_fmla ctx f in
   dec ctx f
 
