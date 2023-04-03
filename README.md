@@ -11,3 +11,6 @@ En Français :
 
 Ce code a été préparé pour un séminaire donné dans le cadre du
 [cours de Xavier Leroy sur les structures de données persistants au Collège de France](https://www.college-de-france.fr/agenda/cours/structures-de-donnees-persistantes).
+
+La vidéo et les transparents sont [disponibles ici](https://www.college-de-france.fr/agenda/seminaire/structures-de-donnees-persistantes/structures-de-donnees-semi-persistantes).
+
