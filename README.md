@@ -10,4 +10,4 @@ This is a quick OCaml implementation of the ideas in
 En Français :
 
 Ce code a été préparé pour un séminaire donné dans le cadre du
-[cours de Xavier Leroy sur les structures de données persistants au Collège de France](https://www.college-de-france.fr/agenda/seminaire/structures-de-donnees-persistantes).
+[cours de Xavier Leroy sur les structures de données persistants au Collège de France](https://www.college-de-france.fr/agenda/cours/structures-de-donnees-persistantes).
